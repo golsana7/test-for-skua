@@ -14,9 +14,12 @@ ssize_t write_proc(struct file *filp, const char *buf, size_t count, loff_t *off
         }
 
 
-        jaeger_trace_id = *((const uint64_t *) buf);
-        jaeger_parent_id = *(((const uint64_t *) buf)+1);
-      
+
+       if(copy_from_user(&jaeger_trace_id,&buf[0],8))
+                    return -EFAULT;
+
+       if(copy_from_user(&jaeger_parent_id,&buf[1],8))
+                    return -EFAULT;
 
 
 
@@ -24,9 +27,8 @@ ssize_t write_proc(struct file *filp, const char *buf, size_t count, loff_t *off
         current->jaeger_parent_id = jaeger_parent_id;
 
         current->jaeger_span_id = 0;
-
-	printk("pointers");
-      
+        
+        printk("copy-from-user");
         printk("jaeger_ctx: jaeger_trace_id %llu; jaeger_parent_id %llu\n", jaeger_trace_id, jaeger_parent_id);
         //printk("%.*s\n", (int)count, buf);
 
