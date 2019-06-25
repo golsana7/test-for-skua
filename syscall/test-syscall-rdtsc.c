@@ -74,7 +74,7 @@ int main() {
    
     }
 
-    printf("total-diff-1 = %llu clock cycles\n", (long long unsigned int)diff);
+    printf("total-diff-1 = %llu clock cycles\n", (long long unsigned int)total_diff);
    //printf("total-diff-1 = %llu clock cycles\n", ((long long unsigned int)diff/CLOCKS_PER_SEC)*1000000);
     total_diff = total_diff/1000;
     printf("elapsed time = %llu clock cycles\n", (long long unsigned int) total_diff);
