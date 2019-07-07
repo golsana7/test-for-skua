@@ -23,3 +23,8 @@ After those steps, system call's related things should be already in following f
 
 in skua-jaeger-client-cpp/src/jaegertracing/Tracer.cpp, insert_trace function has changed to call this new system call: syscall(333, jaeger_trace_id, jaeger_parent_id);
 (necessary headers should be added). modified file is uploaded as Tracer.cpp
+
+
+
+file "write_syscall.cpp" is for measuring time of each write() syscall in my hardware. its build command is : g++ -O3 -march=native -flto -std=c++11 -o write_syscall  write_syscall.cpp  -lrt
+
